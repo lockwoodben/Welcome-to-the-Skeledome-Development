@@ -1,4 +1,3 @@
-
 using System.Collections;
 using UnityEngine;
 //using UnityEngine.InputSystem;
@@ -38,8 +37,8 @@ public class PlayerPhysics : MonoBehaviour
     // jump
     private bool isPartialJump; // is player performing a partial jump (letting go of jump before achieving max height)
     private bool isFalling; // is player falling?
-    private int jCount = 0; // how many times has player jumped before touching ground?
-    private int wCount = 0; // how many times has player wall jumped before touching ground?
+    private int jumpCount = 0; // how many times has player jumped before touching ground?
+    private int wallJumpCount = 0; // how many times has player wall jumped before touching ground?
     private bool onGround; // is player on the ground?
     private bool inLava; // is player in the lava?
     
@@ -97,7 +96,7 @@ public class PlayerPhysics : MonoBehaviour
 
     // activates rigid object
     private void Start() {
-        SetGScale(Attrib.gScale);
+        SetGScale(Attrib.gravityScale);
         isFacingRight = true;
     }
 
@@ -157,8 +156,8 @@ public class PlayerPhysics : MonoBehaviour
             // ground check
             if (!isDashing && !isJumping) {
                 if (Physics2D.OverlapBox(groundCheckPoint.position, groundCheckSize, 0, groundLayer) && !isJumping) { // check if hitbox is colliding with ground
-                    jCount = 0;
-                    wCount = 0;
+                    jumpCount = 0;
+                    wallJumpCount = 0;
                     lastOnGroundTimer = Attrib.coyoteTime;
                     onGround = false;
                 }
@@ -199,7 +198,7 @@ public class PlayerPhysics : MonoBehaviour
             }
 
             // wall jump check
-            if (isWallJumping && Time.time - wallJumpTimer > Attrib.wallJTime)
+            if (isWallJumping && Time.time - wallJumpTimer > Attrib.wallJumpTime)
                 isWallJumping = false;
 
             // Checks 
@@ -286,27 +285,27 @@ public class PlayerPhysics : MonoBehaviour
 
             if(!isDashAttacking) {
                 if (isPartialJump) {
-                    // higher grav if jump is released
-                    // set new grav scale = gScale * partial Jump gravity multiplier
-                    SetGScale(Attrib.gScale * Attrib.partialJumpGravMult);
+                    // higher gravity if jump is released
+                    // set new gravity scale = gravityScale * partial Jump gravity multiplier
+                    SetGScale(Attrib.gravityScale * Attrib.partialJumpGravityMult);
                     // update velocity, keep y velocity lte max fall speed
                     rigid.velocity = new Vector2(rigid.velocity.x, Mathf.Max(rigid.velocity.y, -Attrib.maxFallSpeed));  
                 }
                 else if (isSlide) 
                     SetGScale(0); // set the gravity scale to 0
 
-                 else if ((isJumping || isWallJumping || isFalling) && Mathf.Abs(rigid.velocity.y) < Attrib.jHangTime)
-                    SetGScale(Attrib.gScale * Attrib.jHangGravMult);
+                 else if ((isJumping || isWallJumping || isFalling) && Mathf.Abs(rigid.velocity.y) < Attrib.jumpHangTime)
+                    SetGScale(Attrib.gravityScale * Attrib.jumpHangGravityMult);
 
                  else if (rigid.velocity.y < 0) {
-                    // higher grav when falling
-                    SetGScale(Attrib.gScale * Attrib.fallGravMult);
+                    // higher gravity when falling
+                    SetGScale(Attrib.gravityScale * Attrib.fallGravityMult);
                     // caps fall speed
                     rigid.velocity = new Vector2(rigid.velocity.x, 
                         Mathf.Max(rigid.velocity.y, -Attrib.maxFallSpeed));
                 }
                  else
-                    SetGScale(Attrib.gScale); // default grav
+                    SetGScale(Attrib.gravityScale); // default gravity
             } else
                 SetGScale(0);
 
@@ -343,15 +342,15 @@ public class PlayerPhysics : MonoBehaviour
         // apply airborne multiplier if applicable
         if (lastOnGroundTimer > 0) {
             if (Mathf.Abs(targetSpeed) > 0.01f)
-                accelRate = Attrib.runAccelVal;
+                accelRate = Attrib.runAccelerationVal;
             else
-                accelRate = Attrib.runDeccelVal;
+                accelRate = Attrib.runDeccelerationVal;
         }
         else {
             if (Mathf.Abs(targetSpeed) > 0.01f)
-                accelRate = Attrib.runAccelVal * Attrib.accelInAir;
+                accelRate = Attrib.runAccelerationVal * Attrib.accelerationInAir;
             else
-                accelRate = Attrib.runDeccelVal * Attrib.deccelInAir;
+                accelRate = Attrib.runDeccelerationVal * Attrib.deccelerationInAir;
         }
 
         #endregion
@@ -422,7 +421,7 @@ public class PlayerPhysics : MonoBehaviour
 
     // check if player can jump
     private bool CanJump() {
-        return (lastOnGroundTimer > 0 && !isJumping) || jCount < 2;
+        return (lastOnGroundTimer > 0 && !isJumping) || jumpCount < 2;
     }
 
     // check if player can do partial jump
@@ -446,7 +445,7 @@ public class PlayerPhysics : MonoBehaviour
     // check if player can wall jump
      private bool CanWallJump() {
             return onGround && lastOnGroundTimer <= 0 && lastOnWallTimer > 0 &&
-            lastJumpTime > 0 && wCount < 1 && (!isWallJumping ||
+            lastJumpTime > 0 && wallJumpCount < 1 && (!isWallJumping ||
             (lastOnWallRightTimer > 0 && lastWallJumpD == 1) || 
             (lastOnWallLeftTimer > 0 && lastWallJumpD == -1));
     }
@@ -488,7 +487,7 @@ public class PlayerPhysics : MonoBehaviour
         #region Jump
 
         // calculate the the jump force
-        float force = Attrib.jForce;
+        float force = Attrib.jumpForce;
         
         // if you are falling reset the y velocity
         if (rigid.velocity.y < 0) {
@@ -497,15 +496,15 @@ public class PlayerPhysics : MonoBehaviour
             rigid.velocity = vel;
         }
 
-        if(jCount == 1)
+        if(jumpCount == 1)
             rigid.AddForce(Vector2.up * Mathf.Min(force, Attrib.maxJumpSpeed), ForceMode2D.Impulse);
         else
             rigid.AddForce(Vector2.up * force, ForceMode2D.Impulse);
 
-        jCount++;
+        jumpCount++;
 
         // stops from wall jumping in air
-        if (jCount == 2)
+        if (jumpCount == 2)
             onGround = false;
     }
 
@@ -524,7 +523,7 @@ public class PlayerPhysics : MonoBehaviour
         */
         #region WALL JUMP
 
-        Vector2 force = new Vector2(Attrib.wallJForce.x, Attrib.wallJForce.y);
+        Vector2 force = new Vector2(Attrib.wallJumpForce.x, Attrib.wallJumpForce.y);
         
         if (moveInput.x > 0)
             force.x *= direction; // apply the force in the oppsite direction
@@ -538,7 +537,8 @@ public class PlayerPhysics : MonoBehaviour
             force.y -= rigid.velocity.y;
 
         rigid.AddForce(force, ForceMode2D.Impulse);
-        wCount++;
+        wallJumpCount++;
+
         #endregion
     }
 
@@ -553,7 +553,7 @@ public class PlayerPhysics : MonoBehaviour
     private void Slide() {
         // like run but on the y axis 
         float speed = Attrib.slideSpeed - rigid.velocity.y;
-        float force = speed * Attrib.slideAccel;
+        float force = speed * Attrib.slideAcceleration;
 
         // clamp the force 
         force = Mathf.Clamp(force, -Mathf.Abs(speed) * 
@@ -572,7 +572,7 @@ public class PlayerPhysics : MonoBehaviour
     #region DASH METHODS
 
     // dash coroutine
-    private IEnumerator StartDash(Vector2 dir) {
+    private IEnumerator StartDash(Vector2 direction) {
        lastOnGroundTimer = 0; // set necessary values to 0
        lastDashTime = 0;
        
@@ -584,7 +584,7 @@ public class PlayerPhysics : MonoBehaviour
        SetGScale(0); // remove gravity
 
        while (Time.time - startTime <= Attrib.dashAttackTime) { // during attack phase
-            rigid.velocity = dir.normalized * Attrib.dashSpeed;  // set velocity
+            rigid.velocity = direction.normalized * Attrib.dashSpeed;  // set velocity
             // pauses loop until next frame
             yield return null;
        }
@@ -593,8 +593,8 @@ public class PlayerPhysics : MonoBehaviour
        isDashAttacking = false; // end attack phase
 
        // begin end of dash
-       SetGScale(Attrib.gScale); // return to normal gravity
-       rigid.velocity = Attrib.dashEndSpeed * dir.normalized; // set new velocity
+       SetGScale(Attrib.gravityScale); // return to normal gravity
+       rigid.velocity = Attrib.dashEndSpeed * direction.normalized; // set new velocity
 
        while (Time.time - startTime <= Attrib.dashEndTime) // during end phase
             yield return null; // do nothing
@@ -618,7 +618,7 @@ public class PlayerPhysics : MonoBehaviour
     */
     #region INPUT CHECKS
 
-    public void OnJumpInput() { lastJumpTime = Attrib.jBuffTime; }
+    public void OnJumpInput() { lastJumpTime = Attrib.jumpBufferTime; }
 
 
     // check if partial jump and sey isPartialJump if so

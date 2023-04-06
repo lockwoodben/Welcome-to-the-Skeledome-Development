@@ -8,14 +8,14 @@ public class PlayerAttributes : ScriptableObject
     * These handle all linear movements
     */
     [Header("Run")]
-    public float runMaxSpeed; // speed in which acceleration ends
-    public float runAccel; // how long until max speed is reach
-    [HideInInspector] public float runAccelVal; // force applied to player (multiplied by speedDiff)
-    public float runDeccel; // same as runAccel but opposite
-    [HideInInspector] public float runDeccelVal; // same as runAccelVal by opposite
+    public float runMaxSpeed; // speed in which accelerationeration ends
+    public float runAcceleration; // how long until max speed is reach
+    [HideInInspector] public float runAccelerationVal; // force applied to player (multiplied by speedDiff)
+    public float runDecceleration; // same as runAccelerationeration but opposite
+    [HideInInspector] public float runDeccelerationVal; // same as runAccelerationerationVal by opposite
     [Space(10)]
-    [Range(0.01f, 1)] public float accelInAir; // multiplier to air acceleration
-    [Range(0.01f, 1)] public float deccelInAir; // same as accelInAir but opposite
+    [Range(0.01f, 1)] public float accelerationInAir; // multiplier to air accelerationeration
+    [Range(0.01f, 1)] public float deccelerationInAir; // same as accelerationInAir but opposite
     public bool doConserveMomentum; // forfeit yourself to the rules of Yimir
 
 
@@ -24,10 +24,10 @@ public class PlayerAttributes : ScriptableObject
     * These handle all calculations for gravity
     */
     [Header("Gravity")]
-    [HideInInspector] public float gStrength; // downward force of gravity
-    [HideInInspector] public float gScale; // multiplier of player gravity
+    [HideInInspector] public float gravityStrength; // downward force of gravity
+    [HideInInspector] public float gravityScale; // multiplier of player gravity
     [Space(5)]
-    public float fallGravMult; // gravity multiplier when falling
+    public float fallGravityMult; // gravity multiplier when falling
     public float maxFallSpeed; // downward terminal velocity
     public float maxJumpSpeed; // upward terminal velocity
     [Space(20)]
@@ -38,16 +38,16 @@ public class PlayerAttributes : ScriptableObject
     * These handle all calculations for jump
     */
     [Header("Jump")]
-    public float jHeight; // height of jump
-    public float jTimeToMax; // length of time to reach max height after jumping
-    [HideInInspector] public float jForce; // force applied on jump
-    public float partialJumpGravMult; // gravity multiplier when player releases jump
-    [Range(0f, 1)] public float jHangGravMult; // reduces gravity when near max height
-    public float jHangTime; // time in which player is in hang time
+    public float jumpHeight; // height of jump
+    public float jumpTimeToMax; // length of time to reach max height after jumping
+    [HideInInspector] public float jumpForce; // force applied on jump
+    public float partialJumpGravityMult; // gravity multiplier when player releases jump
+    [Range(0f, 1)] public float jumpHangGravityMult; // reduces gravity when near max height
+    public float jumpHangTime; // time in which player is in hang time
     [Space(5)]
-    public float jHangAccel; // acceleration in hang time
-    public float jHangMaxSpeed; // max speed in hang time
-    [Range(0.01f, 0.5f)] public float jBuffTime; // time before hitting ground where your jump still counts
+    public float jumpHangAcceleration; // accelerationeration in hang time
+    public float jumpHangMaxSpeed; // max speed in hang time
+    [Range(0.01f, 0.5f)] public float jumpBufferTime; // time before hitting ground where your jump still counts
     [Range(0.01f, 0.5f)] public float coyoteTime; // time after falling off ledge in which you can still jump
 
 
@@ -56,8 +56,8 @@ public class PlayerAttributes : ScriptableObject
     *   These handle additional calculations for wall jumps
     */ 
     [Header("Wall Jump")]
-    [Range(0f, 1.5f)]public float wallJTime; // how long since last wall jump
-    public Vector2 wallJForce; // force in which you launch from wall
+    [Range(0f, 1.5f)]public float wallJumpTime; // how long since last wall jump
+    public Vector2 wallJumpForce; // force in which you launch from wall
     public bool turnOnWall; // cause player to turn on wall jump
 
     [Space(20)]
@@ -91,7 +91,7 @@ public class PlayerAttributes : ScriptableObject
     */
     [Header("Slides")]
     public float slideSpeed; // the speed in which the player slides down a wall
-    public float slideAccel; // the speed in which the player accelerates down a wall
+    public float slideAcceleration; // the speed in which the player accelerationerates down a wall
 
 
 
@@ -102,23 +102,23 @@ public class PlayerAttributes : ScriptableObject
     private void OnValidate()
     {
         // calculate movement speeds
-        runAccelVal = (50 * runAccel) / runMaxSpeed;
-        runDeccelVal = (50 * runDeccel) / runMaxSpeed;
+        runAccelerationVal = (50 * runAcceleration) / runMaxSpeed;
+        runDeccelerationVal = (50 * runDecceleration) / runMaxSpeed;
         
         // calculate strength of gravity
-        gStrength = -(2 * jHeight) / (jTimeToMax * jTimeToMax);
+        gravityStrength = -(2 * jumpHeight) / (jumpTimeToMax * jumpTimeToMax);
 
         // scale of gravity on rigid body
-        gScale = gStrength / Physics2D.gravity.y;
+        gravityScale = gravityStrength / Physics2D.gravity.y;
 
         // calculate upward force of jump
-        jForce = Mathf.Abs(gStrength) * jTimeToMax;
+        jumpForce = Mathf.Abs(gravityStrength) * jumpTimeToMax;
          
 
-        // Clamp takes the parameters (value, min, max) as input and returns result between min and max
+        // Clamp takes the parameters (Value, min, max) as input and returns result between min and max
         #region Variable Ranges
-        runAccel = Mathf.Clamp(runAccel, 0.01f, runMaxSpeed);
-        runDeccel = Mathf.Clamp(runDeccel, 0.01f, runMaxSpeed);
+        runAcceleration = Mathf.Clamp(runAcceleration, 0.01f, runMaxSpeed);
+        runDecceleration = Mathf.Clamp(runDecceleration, 0.01f, runMaxSpeed);
         #endregion
     }
 
