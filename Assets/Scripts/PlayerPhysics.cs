@@ -101,7 +101,9 @@ public class PlayerPhysics : MonoBehaviour
         isFacingRight = true;
     }
 
-    private void Awake() { rigid = GetComponent<Rigidbody2D>(); }
+    private void Awake() {
+        rigid = GetComponent<Rigidbody2D>();
+    }
 
     private void Update() {
             
@@ -616,24 +618,15 @@ public class PlayerPhysics : MonoBehaviour
     */
     #region INPUT CHECKS
 
-    public void OnJumpInput() {
-            // set 
-            lastJumpTime = Attrib.jBuffTime;
-    }
+    public void OnJumpInput() { lastJumpTime = Attrib.jBuffTime; }
 
 
     // check if partial jump and sey isPartialJump if so
-    public void OnJumpUpInput() {
-        if (CanPartialJump())
-            isPartialJump = true;
-    }
+    public void OnJumpUpInput() { if (CanPartialJump()) isPartialJump = true; }
 
 
-    public void OnDashInput() {
-
-        lastDashTime = Attrib.dashInputBufferTime;
-
-    }
+    public void OnDashInput() { lastDashTime = Attrib.dashInputBufferTime; }
+    
     #endregion
 }
     
