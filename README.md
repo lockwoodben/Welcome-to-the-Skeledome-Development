@@ -13,15 +13,15 @@ Players will control their character similarly to Super Meat Boy, allowing for p
 
 Stretch Goals:
 
-    Match Altering Random Events: Random events can occur during matches, which can affect gameplay and give players an unexpected advantage or disadvantage. This will add an element of unpredictability to matches, making them more exciting and engaging.
+Match Altering Random Events: Random events can occur during matches, which can affect gameplay and give players an unexpected advantage or disadvantage. This will add an element of unpredictability to matches, making them more exciting and engaging.
 
-    Procedurally Generated Platforming Challenges: In addition to the standard platforming levels, procedurally generated levels will be added, offering unique challenges for players. These levels will be generated randomly, ensuring that no two levels are the same.
+Procedurally Generated Platforming Challenges: In addition to the standard platforming levels, procedurally generated levels will be added, offering unique challenges for players. These levels will be generated randomly, ensuring that no two levels are the same.
 
-    Single Player Tournament Mode: A single-player tournament mode will be added, where players can compete against AI-controlled opponents in a tournament format. This mode will offer players the opportunity to practice their skills against computer-controlled opponents.
+Single Player Tournament Mode: A single-player tournament mode will be added, where players can compete against AI-controlled opponents in a tournament format. This mode will offer players the opportunity to practice their skills against computer-controlled opponents.
 
-    Party Mode Map Editor: A map editor will be added to the party mode, allowing players to create and share their own levels with friends. This will add an element of creativity to the game, allowing players to create their unique challenges and share them with the community.
+Party Mode Map Editor: A map editor will be added to the party mode, allowing players to create and share their own levels with friends. This will add an element of creativity to the game, allowing players to create their unique challenges and share them with the community.
 
-    Party Mode 1v1 Tournament: A 1v1 tournament mode will be added to the party mode, allowing players to compete against each other in a tournament format. This mode will be ideal for parties and events, allowing players to compete against each other and determine who is the best player.
+Party Mode 1v1 Tournament: A 1v1 tournament mode will be added to the party mode, allowing players to compete against each other in a tournament format. This mode will be ideal for parties and events, allowing players to compete against each other and determine who is the best player.
 
 Development:
 Welcome to the Skeledome is being developed by Ben Lockwood and Aaron Kennerly using the Unity Engine. The game is currently in the first stages of development, and we are working hard to bring you an exciting and engaging gameplay experience.
