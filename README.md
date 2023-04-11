@@ -12,7 +12,7 @@ In Welcome to the Skeledome, players will take control of identical, weak beings
 
 Attention to the movement allowing for precise platforming and engaging environments. The game features a variety of power-ups and weapons that can be used to gain an advantage over opponents.
 
-###Stretch Goals:
+### Stretch Goals:
 The developers have some exciting stretch goals for Welcome to the Skeledome that they plan to implement as development progresses. These goals include:
 
    Match Altering Random Events: Random events can occur during matches, which can affect gameplay and give players an unexpected advantage or disadvantage. This will add an element of unpredictability to matches, making them more exciting and engaging.
