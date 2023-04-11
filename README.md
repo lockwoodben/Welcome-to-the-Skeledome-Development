@@ -2,7 +2,7 @@ Welcome to Welcome to the Skeledome, an action-packed player vs player platformi
 
 
 ### Getting Started:
-To play Welcome to the Skeledome, you'll need a PC with Windows, macOS, or Linux operating system. The game requires a minimum of 4GB of RAM and 2GB of available storage space.
+Welcome to the Skeledome is not currently available to download. We will update requirements and specs when we have more information.
 
 ### Installation:
 Welcome to the Skeledome is not yet available for download or purchase. However, the developers will update this Read Me file with any new information regarding the release of the game.
