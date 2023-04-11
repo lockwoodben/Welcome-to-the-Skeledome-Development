@@ -29,6 +29,8 @@ The developers have some exciting stretch goals for Welcome to the Skeledome tha
 Welcome to the Skeledome is being developed by Ben Lockwood and Aaron Kennerly using the Unity Engine. The game is currently in the first stages of development, and the developers are working hard to bring you an exciting and engaging gameplay experience.
 Feedback:
 
-The developers value your feedback and welcome any comments or suggestions you may have. So, please feel free to contact them at lockwoodb@protonmail.com with any feedback or inquiries.
+The developers value your feedback and welcome any comments or suggestions you may have. So, please feel free to contact them at lockwoodb@protonmail.com with any feedback or inquiries. Also, check out our <a href ="https://discord.gg/wFPWCHWp6n">
+  Discord
+  </a> for regular updates!
 
 Thank you for your interest in Welcome to the Skeledome! The developers can't wait to share this game with you.
