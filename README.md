@@ -15,15 +15,15 @@ Attention to the movement allowing for precise platforming and engaging environm
 ###Stretch Goals:
 The developers have some exciting stretch goals for Welcome to the Skeledome that they plan to implement as development progresses. These goals include:
 
-    Match Altering Random Events: Random events can occur during matches, which can affect gameplay and give players an unexpected advantage or disadvantage. This will add an element of unpredictability to matches, making them more exciting and engaging.
+   Match Altering Random Events: Random events can occur during matches, which can affect gameplay and give players an unexpected advantage or disadvantage. This will add an element of unpredictability to matches, making them more exciting and engaging.
 
-    Procedurally Generated Platforming Challenges: In addition to the standard platforming levels, procedurally generated levels will be added, offering unique challenges for players. These levels will be generated randomly, ensuring that no two levels are the same.
+   Procedurally Generated Platforming Challenges: In addition to the standard platforming levels, procedurally generated levels will be added, offering unique challenges for players. These levels will be generated randomly, ensuring that no two levels are the same.
 
-    Single Player Tournament Mode: A single-player tournament mode will be added, where players can compete against AI-controlled opponents in a tournament format. This mode will offer players the opportunity to practice their skills against computer-controlled opponents.
+   Single Player Tournament Mode: A single-player tournament mode will be added, where players can compete against AI-controlled opponents in a tournament format. This mode will offer players the opportunity to practice their skills against computer-controlled opponents.
 
-    Party Mode Map Editor: In this mode, players who have been eliminated from a match will be able to add additional obstacles and hazards to the platform to throw off the remaining players. This feature will make matches more exciting and challenging as players will have to adapt to unexpected obstacles. The map editor will be easy to use, allowing players to rapidly alter the flow of the match. 
+   Party Mode Map Editor: In this mode, players who have been eliminated from a match will be able to add additional obstacles and hazards to the platform to throw off the remaining players. This feature will make matches more exciting and challenging as players will have to adapt to unexpected obstacles. The map editor will be easy to use, allowing players to rapidly alter the flow of the match. 
     
-    Party Mode 1v1 Tournament: A 1v1 tournament mode will be added to the party mode, allowing players to compete against each other in a tournament format. This mode will be ideal for parties and events, allowing players to compete against each other and determine who is the best player.
+   Party Mode 1v1 Tournament: A 1v1 tournament mode will be added to the party mode, allowing players to compete against each other in a tournament format. This mode will be ideal for parties and events, allowing players to compete against each other and determine who is the best player.
 
 ### Development:
 Welcome to the Skeledome is being developed by Ben Lockwood and Aaron Kennerly using the Unity Engine. The game is currently in the first stages of development, and the developers are working hard to bring you an exciting and engaging gameplay experience.
